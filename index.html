@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Background Video Page</title>
+        <link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+            <div id="splash-screen">
+                <img src="Images/splash_screen.gif" alt="Splash Image"> 
+            </div>
+            <div id="container">
+                <h1>Hello Harshada</h1>
+                <button class="button" onclick="goToPage2()">Login</button>
+            </div>
+        
+            <script>
+                function goToPage2() {
+                    document.getElementById('splash-screen').style.display = 'block'; // Show splash screen
+                    setTimeout(function(){
+                        window.location.href = 'Page2_templates/page2.html'; // Redirect after 2 second
+                    }, 2000);
+                }
+            </script>
+        </body>
+        </html>
+        

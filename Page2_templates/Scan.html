@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background Video Page</title>
+  <link rel="stylesheet" href="../CSS/scan.css">
+
+  <script>
+    function executePythonScript() {
+      $.ajax({
+        url: '/executePythonScript',
+        type: 'GET',
+        success: function (data) {
+          console.log('Python script executed successfully:', data);
+          // After executing the Python script, open the Excel files
+
+        },
+        error: function (xhr, status, error) {
+          console.error('Error executing Python script:', status, error);
+        }
+      });
+    }
+    $('#compareButton').click(function () {
+      executePythonScript();
+
+    });
+  </script>
+
+</head>
+
+<body>
+  <header>
+    <div class="navbar">
+      <div class="logo"><a href="#">Scan</a></div>
+      <ul class="links">
+        <li><a href="page2.html">Home</a></li>
+        <li><a href="Scan.html">Scan</a></li>
+        <li><a href="Inventory.html">Inventory</a></li>
+        <li><a href="Drone.html">Drone</a></li>
+
+      </ul>
+      <a href="page2.html" class="action_btn">Back to Home</a>
+    </div>
+  </header>
+
+  <!-- Main container for buttons -->
+  <div id="main-container">
+    <!-- Left side buttons container -->
+    <div id="left-container">
+      <!-- Left side buttons -->
+      <button class="a" onclick="markStepDone(1) ">Upload Image</button>
+      <button class="b" id="processForm" type="submit" onclick="markStepDone(2)" >Process Images</button>
+       <button class="c" id="decodeForm" type="submit" onclick="markStepDone(3)">Detect And Decode </button>
+    </div>
+
+    <!-- Container for d and e -->
+    <div id="right-container">
+      <!-- Right side buttons -->
+      <button class="d" onclick="markStepDone(4)">Count Boxes</button>
+      <button class="e" onclick="gotoInventory()">Download Previous File</button>
+    </div>
+    <div id="button-container">
+      <button class="f">Box Count</button>
+      <button class="g">Total No. of folder uploaded </button>
+      <button class="h">Download CSV File</button>
+    </div>
+
+    <div id="progress-bar">
+      <div id="progress-bar-fill"></div>
+      <div class="progress-bar">
+        <div class="step"></div>
+        <div class="step"></div>
+        <div class="step"></div>
+        <div class="step"></div>
+        <div class="emoji" id="emoji">📦</div>
+      </div>
+    </div>
+  </div>
+  <script src="../Page2_scripts/Scan.js"></script>
+  <script>
+    function gotoInventory() {
+      window.location.href = 'Inventory.html';
+    }
+    function markStepDone(stepNumber) {
+      var steps = document.querySelectorAll('.step');
+      for (var i = 0; i < steps.length; i++) {
+        if (i < stepNumber) {
+          steps[i].classList.add('done');
+        } else {
+          steps[i].classList.remove('done');
+        }
+      }
+      // Move emoji based on stepNumber
+      const emoji = document.getElementById('emoji');
+      emoji.style.left = (stepNumber) * 25 + '%'; // Adjust the percentage based on the number of steps
+    }
+    document.getElementById('decodeForm').addEventListener("click", function() {
+            event.preventDefault();
+            
+            // Send a GET request to the Flask API endpoint
+            fetch('/decode', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ folder_path: Images })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        });
+    // document.getElementById("decodeForm").addEventListener("click", function() {
+    //               fetch('/decode')
+    //               .then(response => response.text())
+    //               .then(data => console.log(data))
+    //               .catch(error => console.error('Error:', error));
+    //           });
+  </script>
+ 
+  <!-- <script>
+        document.getElementById('decodeForm').addEventListener("click", function() {
+            event.preventDefault();
+
+            // Send a POST request to the Flask API endpoint
+            fetch('/decode', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ folder_path: Images })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
+            });
+        });
+  </script> -->
+  <script>
+          document.getElementById('processForm').addEventListener('submit', function(event) {
+              event.preventDefault();
+              
+              // Send a POST request to the Flask API endpoint
+              fetch('/process_images', {
+                  method: 'GET',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ folder_path: Images })
+              })
+              .then(response => response.json())
+              .then(data => {
+                  alert(data.message);
+              })
+              .catch(error => {
+                  console.error('Error:', error);
+                  alert('An error occurred. Please try again later.');
+              });
+          });
+  </script>
+</body>
+</html>

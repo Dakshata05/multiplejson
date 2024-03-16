@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    
+
+
+ body {
+        background-image: url('../Images/gradient_1.jpg');
+        background-size: cover; 
+        
+        
+        
+      }
+    
+}
+li{
+    list-style: none;
+  }
+
+
+
+  a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    
+    margin: 10px;
+  }
+
+  a:hover {
+    color: maroon;
+    background-size: 100% 150%;
+  }
+
+
+
+  header {
+    position: relative;
+    padding: 0 2rem;
+    
+  }
+
+  .navbar{
+    width :100%;
+    height: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+  }
+  
+  .navbar .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .navbar .links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .navbar .toggle_btn {
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+  }
+
+  .action_btn {
+    /* background-color:rgb(61, 152, 194); */
+    color:#fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: scale 0.2 ease;
+
+  }
+
+  .action_btn:hover {
+    scale: 1.4;
+    color: #fff;
+  }
+
+
+h1{
+    text-align: center;
+    size: 5em;
+   
+}
+button{
+    width: 160px; /* Fixed width */
+    height: 50px; /* Fixed height */
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    background-color:maroon;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    align-items: center;
+}
+button:hover{
+    background-color: black;
+}
